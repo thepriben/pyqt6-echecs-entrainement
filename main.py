@@ -7,18 +7,17 @@ import sys
 import json
 import shutil
 from dataclasses import dataclass
-from typing import Optional, List
+from typing import Optional
 
-from PyQt6.QtCore import Qt, QRectF, QSize, QTimer, pyqtSignal
-from PyQt6.QtGui import QColor, QFont, QPainter, QPen, QAction
+from PyQt6.QtCore import Qt, QRectF, QSize, pyqtSignal
+from PyQt6.QtGui import QColor, QFont, QPainter, QPen
 from PyQt6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QFileDialog, QMessageBox,
+    QApplication, QMainWindow, QWidget, QMessageBox,
     QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QLineEdit,
     QSplitter
 )
 
 import chess
-import chess.pgn
 import chess.engine
 
 # ------------------------ Config & Engine ------------------------
@@ -333,9 +332,6 @@ class MainWindow(QMainWindow):
         lay.addWidget(splitter)
         self.setCentralWidget(container)
 
-        # Menu (épuré)
-        self._build_menu()
-
         # Signals
         self.btn_new.clicked.connect(self.on_new_game)
         self.btn_undo.clicked.connect(self.on_undo)
@@ -364,25 +360,6 @@ class MainWindow(QMainWindow):
         except Exception:
             pass
 
-    # ------------------------ Menu ------------------------
-    def _build_menu(self):
-        menubar = self.menuBar()
-        file_menu = menubar.addMenu("File")
-
-        open_pgn = QAction("Open PGN…", self)
-        open_pgn.triggered.connect(self.on_open_pgn)
-        file_menu.addAction(open_pgn)
-
-        file_menu.addSeparator()
-        quit_act = QAction("Quit", self)
-        quit_act.triggered.connect(self.close)
-        file_menu.addAction(quit_act)
-
-        settings_menu = menubar.addMenu("Settings")
-        set_engine = QAction("Engine Path…", self)
-        set_engine.triggered.connect(self.on_set_engine_path)
-        settings_menu.addAction(set_engine)
-
     # ----------------------- Slots ------------------------
     def on_new_game(self):
         self.board_widget.set_board(chess.Board())
@@ -410,24 +387,6 @@ class MainWindow(QMainWindow):
         except ValueError:
             self.time_edit.setText(str(self.engine_cfg.limit_time_ms))
 
-    def on_open_pgn(self):
-        path, _ = QFileDialog.getOpenFileName(self, "Open a PGN file", "", "PGN Files (*.pgn);;All (*.*)")
-        if not path:
-            return
-        try:
-            with open(path, 'r', encoding='utf-8', errors='ignore') as f:
-                game = chess.pgn.read_game(f)
-            if not game:
-                QMessageBox.warning(self, "PGN", "Could not read a game from this PGN.")
-                return
-            board = game.board()
-            for mv in game.mainline_moves():
-                board.push(mv)
-            self.board_widget.set_board(board)
-            self.status.setText("PGN loaded. Final position shown.")
-        except Exception as e:
-            QMessageBox.critical(self, "PGN", f"Read error: {e}")
-
     def on_set_engine_path(self):
         from PyQt6.QtWidgets import QInputDialog
         current = self.engine_cfg.path or ""
@@ -446,7 +405,6 @@ class MainWindow(QMainWindow):
             self._save_settings()
             self.status.setText("Engine path updated.")
 
-    # --- Core feature: après TON coup, suggérer le meilleur coup du camp au trait ---
     def on_user_move(self, move: chess.Move):
         side_to_move = "White" if self.board_widget.board.turn == chess.WHITE else "Black"
         suggestion = self.engine.best_move(self.board_widget.board)
