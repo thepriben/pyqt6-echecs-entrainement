@@ -1,4 +1,4 @@
-# PyQt6 Chess Trainer
+# PyQt6 Échecs Entraînement
 
 ## Description
 **PyQt6 Chess Trainer** est une application légère d’entraînement aux échecs construite avec **PyQt6** et **python-chess**. Après chaque coup que vous jouez (blancs ou noirs), le système suggère immédiatement le meilleur coup pour le camp à jouer, en utilisant le moteur Stockfish.  
