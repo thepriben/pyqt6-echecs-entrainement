@@ -6,6 +6,7 @@
 **PyQt6 Chess Trainer** est une application légère d’entraînement aux échecs construite avec **PyQt6** et **python-chess**. Après chaque coup que vous jouez (blancs ou noirs), le système suggère immédiatement le meilleur coup pour le camp à jouer, en utilisant le moteur Stockfish.  
 Vous gardez le contrôle total : le moteur ne joue jamais à votre place. Il met simplement en évidence sa réponse recommandée.
 
+![Capture d’écran de l’application](image.png)
 Fonctionnalités principales :
 - Jouer manuellement en tant que blanc ou noir.  
 - Voir immédiatement le meilleur coup de l’adversaire après votre coup.  
@@ -57,5 +58,3 @@ Fonctionnalités principales :
    - **Undo** : annuler votre dernier coup  
    - **Rotate board** : inverser l’orientation de l’échiquier  
    - **Engine time (ms)** : ajuster le temps de réflexion du moteur par coup  
-
-![Capture d’écran de l’application](image.png)
