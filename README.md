@@ -1,4 +1,4 @@
-#### Construire une application d’entraînement aux échecs avec PyQt6, python-chess et Stockfish*, 2025, *Programmez!* n°272, pp. 31-33.
+#### *Construire une application d’entraînement aux échecs avec PyQt6, python-chess et Stockfish*, 2025, *Programmez!* n°272, pp. 31-33.
 
 ---
 
