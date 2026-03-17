@@ -2,27 +2,22 @@
 
 ---
 
-## Description
+##### Description
 **PyQt6 Chess Trainer** est une application légère d’entraînement aux échecs construite avec **PyQt6** et **python-chess**. Après chaque coup que vous jouez (blancs ou noirs), le système suggère immédiatement le meilleur coup pour le camp à jouer, en utilisant le moteur Stockfish.  
 Vous gardez le contrôle total : le moteur ne joue jamais à votre place. Il met simplement en évidence sa réponse recommandée.
 
-Ce dépôt GitHub constitue le support du code associé à cet article :
-- )
- 
 Fonctionnalités principales :
 - Jouer manuellement en tant que blanc ou noir.  
 - Voir immédiatement le meilleur coup de l’adversaire après votre coup.  
 - Mise en évidence de votre dernier coup (bleu) et de la réponse suggérée par le moteur (rouge).  
 - Temps de réflexion du moteur configurable.  
 
----
+##### Stockfish
 
-## Stockfish
-
-### Qu’est-ce que c’est ?
+###### Qu’est-ce que c’est ?
 **Stockfish** est l’un des moteurs d’échecs open-source les plus puissants. Il évalue les positions et suggère les meilleurs coups grâce au protocole **UCI** (Universal Chess Interface). L'application exécute Stockfish **en local**, ce qui permet un fonctionnement hors ligne et sans latence.  
 
-### Installation
+##### Installation
 
 - **macOS (Homebrew) :**
   ```bash
@@ -38,9 +33,8 @@ Fonctionnalités principales :
 - **Windows :**
   Téléchargez un binaire précompilé depuis le [site officiel de Stockfish](https://stockfishchess.org/download/)  
 
----
 
-## Installation
+##### Installation de l'application
 
    ```bash 
    python3 -m venv .venv
@@ -48,9 +42,7 @@ Fonctionnalités principales :
    pip install -r requirements.txt
    ```
 
----
-
-## Utilisation
+##### Utilisation
 
 1. Lancez l’application :
    ```bash
